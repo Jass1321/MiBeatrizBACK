@@ -1,15 +1,14 @@
 package com.app.repository.Maestro.Tercero;
 
 import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.app.model.Maestro.Tercero.Proveedor;
+import com.app.model.Maestro.Tercero.Cliente;
 
 @Repository
-public interface ProveedorRepository extends JpaRepository<Proveedor, Long>{
-	
-	Optional<Proveedor> findByRuc(int ruc);
+public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
+	Optional<Cliente> findByRuc(int ruc);
 	boolean existsByRuc(int ruc);
-	
 }

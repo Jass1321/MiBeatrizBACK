@@ -1,6 +1,5 @@
 package com.app.model.Maestro.Tercero;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,13 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-public class Proveedor implements Serializable{
+public class Cliente {
 
-	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -31,39 +26,47 @@ public class Proveedor implements Serializable{
 	private String nombre;
 	private String rubro;
 	private String comentario;
-		
-	//1 tercero -> N Direccion
-	@JsonIgnoreProperties("proveedor")
-	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
-	public Set<Direccion> direcciones = new HashSet<>();
-	
 	/*
+	//1 tercero -> N Direccion
+	@OneToMany(mappedBy = "cliente",  cascade = CascadeType.ALL)
+	private Set<Direccion> direcciones = new HashSet<>();
 	//1 tercero -> N Contacto
-	@JsonIgnoreProperties("proveedor")
-	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente",  cascade = CascadeType.ALL)
 	private Set<Contacto> contactos = new HashSet<>();
-	//1 tercero -> N Cuenta
-	@JsonIgnoreProperties("proveedor")
-	@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
-	private Set<Cuenta> cuentas = new HashSet<>();
-	*/
 	
-	public Proveedor() {
+	public Cliente() {
 		
 	}
 
-	public Proveedor(String codigo, int ruc, Date fechaInicio, String nombre, String rubro,
-			Set<Direccion> direcciones, String comentario) {
+	public Cliente(String codigo, int ruc, Date fechaInicio, String nombre, String rubro, String comentario,
+			Set<Direccion> direcciones, Set<Contacto> contactos) {
+		super();
 		this.codigo = codigo;
 		this.ruc = ruc;
 		this.fechaInicio = fechaInicio;
 		this.nombre = nombre;
 		this.rubro = rubro;
-		this.direcciones = direcciones;
 		this.comentario = comentario;
+		this.direcciones = direcciones;
+		this.contactos = contactos;
+	}
+	
+	public Set<Direccion> getDirecciones() {
+		return direcciones;
 	}
 
-	
+	public void setDirecciones(Set<Direccion> direcciones) {
+		this.direcciones = direcciones;
+	}
+
+	public Set<Contacto> getContactos() {
+		return contactos;
+	}
+
+	public void setContactos(Set<Contacto> contactos) {
+		this.contactos = contactos;
+	}*/
+
 	public long getId() {
 		return id;
 	}
@@ -111,6 +114,7 @@ public class Proveedor implements Serializable{
 	public void setRubro(String rubro) {
 		this.rubro = rubro;
 	}
+
 	
 	public String getComentario() {
 		return comentario;
@@ -119,15 +123,6 @@ public class Proveedor implements Serializable{
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-
-	public Set<Direccion> getDirecciones() {
-		return direcciones;
-	}
-
-	public void setDirecciones(Set<Direccion> direcciones) {
-		this.direcciones = direcciones;
-	}
-
 	
 	
 }

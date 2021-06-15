@@ -26,11 +26,12 @@ public class Subfamilia {
 	@Column(unique = true)
 	private String nombre;
 	
-	//Muchas Sub-familias tiene una familia
+	//N Sub-familias -> 1 Familia
 	@ManyToOne(optional = false)
 	@JsonIgnoreProperties("subfamilias")
 	private Familia familia;
-	//Una Sub-Familia tiene muchos Productos
+	
+	//1 Sub-Familia -> N Productos
 	@OneToMany(mappedBy = "subfamilia" )
 	@JsonIgnore
 	private Set<Producto> productos = new HashSet<>();

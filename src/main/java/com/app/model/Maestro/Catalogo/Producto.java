@@ -16,7 +16,7 @@ public class Producto {
 	
 	private String codigo;
 	
-	//Muchos productos tiene una subfamilia
+	//N Productos -> 1 Subfamilia
 	@ManyToOne(optional=false)
 	@JsonIgnoreProperties("productos")
 	private Subfamilia subfamilia;

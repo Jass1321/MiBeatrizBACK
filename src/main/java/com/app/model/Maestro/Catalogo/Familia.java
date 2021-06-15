@@ -15,7 +15,7 @@ public class Familia {
 	@Column(unique = true)
 	private String nombre;
 	
-	//Una familia tiene muchas sub-familias
+	//1 Familia -> N Sub-familias
 	@OneToMany(mappedBy = "familia", fetch = FetchType.EAGER)
 	private Set<Subfamilia> subfamilias = new HashSet<>();
 
