@@ -1,5 +1,6 @@
-package com.app.controller.Maestro.Organizacion;
+package com.app.controller.Maestro;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.NotFoundException;
-import com.app.model.Maestro.Organizacion.Area;
-import com.app.model.Maestro.Organizacion.Departamento;
-import com.app.repository.Maestro.Organizacion.AreaRepository;
-import com.app.repository.Maestro.Organizacion.DepartamentoRepository;
+import com.app.model.Maestro.Area;
+import com.app.model.Maestro.Departamento;
+import com.app.repository.Maestro.AreaRepository;
+import com.app.repository.Maestro.DepartamentoRepository;
 import com.app.service.Maestro.DepartamentoService;
 
 @RestController
@@ -42,6 +43,11 @@ public class DepartamentoController {
 	private AreaRepository areaRepository;
 	
 	/*----------READ----------*/
+	//READ DEP SIMPLE
+	@GetMapping("/listSelectDep")
+	private ResponseEntity<List<Departamento>> getListDepa(){
+		return ResponseEntity.ok(departamentoService.listDep());
+	}
 	//READ AREA WITH PAGE
 	@GetMapping("/listArea")
 	public ResponseEntity<Page<Area>> listAllArea(
@@ -109,6 +115,15 @@ public class DepartamentoController {
 				}).orElseThrow(() -> new NotFoundException("Departamento ID " + depId + " not found"));
 	}
 	
+	@PostMapping("/save/areas")
+	private ResponseEntity<Area> saveArea(@RequestBody Area area){
+		try {
+			Area areaGuardada = departamentoService.saveArea(area);		
+		return ResponseEntity.created(new URI("/areas"+areaGuardada.getId())).body(areaGuardada);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}	
+	}
 	/*----------UPDATE----------*/
 	@PutMapping("/update/{depId}")
 	public Departamento updateDep(@PathVariable Long depId, @Validated @RequestBody Departamento depDTO) {
@@ -148,4 +163,11 @@ public class DepartamentoController {
 					}).orElseThrow(() -> new NotFoundException(
 							"Area not found with ID " + areaId + " and departamento ID  " + depId));
 				}
+	
+	@DeleteMapping("/delete/areas/{id}")
+	private ResponseEntity<Boolean> deleteArea(@PathVariable("id")Long id){
+		departamentoService.deleteByAreaId(id);
+		return ResponseEntity.ok(!(departamentoService.findById(id)!=null));
+		
+	}
 }

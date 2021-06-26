@@ -1,5 +1,4 @@
-package com.app.model.Maestro.Organizacion;
-
+package com.app.model.Maestro;
 
 import java.io.Serializable;
 
@@ -8,13 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "departamentos")
-public class Departamento implements Serializable {
+@Table(name = "areas")
+public class Area implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,14 +29,21 @@ public class Departamento implements Serializable {
 	@Column(unique = true)
 	private String nombre;
 	
+	/* N Area -> 1 Departamento */
+	@ManyToOne
+	@JoinColumn(name = "dep_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Departamento dep;
+
 	/* CONSTRUCTOR*/
-	public Departamento() {
+	public Area() {
 		
 	}
-
-	public Departamento(String nombre) {
+	
+	public Area(@NotNull String nombre, Departamento dep) {
 		super();
 		this.nombre = nombre;
+		this.dep = dep;
 	}
 
 	/* GET & SET*/
@@ -53,8 +63,16 @@ public class Departamento implements Serializable {
 		this.nombre = nombre;
 	}
 
+	public Departamento getDep() {
+		return dep;
+	}
+
+	public void setDep(Departamento dep) {
+		this.dep = dep;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 }

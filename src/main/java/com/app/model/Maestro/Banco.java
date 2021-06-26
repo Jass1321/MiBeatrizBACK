@@ -1,29 +1,40 @@
-package com.app.model.Maestro.Banco;
+package com.app.model.Maestro;
 
+import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Banco {
+@Table(name = "bancos")
+public class Banco implements Serializable {
 
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@NotNull
+	@Column(unique = true)
 	private String nombre;
 	
+	/* CONSTRUCTOR*/
 	public Banco() {
 		
 	}
 	
-	public Banco(long id, String nombre) {
+	public Banco(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
 	
+	/* GET & SET*/
 	public long getId() {
 		return id;
 	}
@@ -37,5 +48,7 @@ public class Banco {
 		this.nombre = nombre;
 	}
 
-	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

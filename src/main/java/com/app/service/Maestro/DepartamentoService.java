@@ -1,7 +1,7 @@
 package com.app.service.Maestro;
 
-
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,10 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.app.dto.NotFoundException;
-import com.app.model.Maestro.Organizacion.Area;
-import com.app.model.Maestro.Organizacion.Departamento;
-import com.app.repository.Maestro.Organizacion.AreaRepository;
-import com.app.repository.Maestro.Organizacion.DepartamentoRepository;
+import com.app.model.Maestro.Area;
+import com.app.model.Maestro.Departamento;
+import com.app.repository.Maestro.AreaRepository;
+import com.app.repository.Maestro.DepartamentoRepository;
 
 @Service
 public class DepartamentoService {
@@ -25,6 +25,10 @@ public class DepartamentoService {
 	private AreaRepository areaRepository;
 	
 	/*----------READ BASIC----------*/
+	public List<Departamento> listDep(){
+		return departamentoRepository.findAll();
+	}
+	
 	public Page<Area> listArea(Pageable pageable) {
 		return areaRepository.findAll(pageable);
 	}
@@ -44,7 +48,6 @@ public class DepartamentoService {
 	}
 	
 	/*----------SEARCHS----------*/
-	
 	public Departamento getDepById(Long depId) {
 		Departamento dep = new Departamento();
 		dep = departamentoRepository.findById(depId)
@@ -52,6 +55,9 @@ public class DepartamentoService {
 		return dep;
 	}
 	
+	public Optional<Area> findById(Long id) {
+		return null;
+	}
 	
 	public Area getAreaIdByIdDep(Long areaId) {
 		Area area = new Area(null, null);
@@ -63,6 +69,11 @@ public class DepartamentoService {
 	public Departamento createDep(Departamento dep) {
 		return departamentoRepository.save(dep);
 	}
+	
+	public Area  saveArea(Area area) {
+		return areaRepository.save(area);
+	}
+	
 	/*----------UPDATE----------*/
 	public Departamento updateDep(Long depId, Departamento depDTO) {
 		Departamento dep = new Departamento();
@@ -83,4 +94,12 @@ public class DepartamentoService {
 		departamentoRepository.delete(dep);
 		return ResponseEntity.ok().build();
 	}	
+	
+	public void deleteByAreaId(Long id) {
+		areaRepository.deleteById(id);
+	}
+
+	public void deleteArea(Area area) {
+		areaRepository.delete(area);
+	}
 }
