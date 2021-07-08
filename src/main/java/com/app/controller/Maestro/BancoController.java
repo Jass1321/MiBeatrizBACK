@@ -88,15 +88,16 @@ public class BancoController {
 		return bancoService.getBancoById(bancoId);
 	}
 	
-	//READ AREAS BY DEP ID 
+	//READ CUENTAS BY BANCO ID 
 	@GetMapping("/listBanco/{bancoId}/cuentas")
-	public List<CuentaBancaria> getCuentasByDepId(
+	public List<CuentaBancaria> getCuentasByBancoId(
 			@PathVariable("bancoId") Long bancoId){
 		return cuentaRepository.findByBancoId(bancoId);
 		
 	}
 	
-	@GetMapping("/listDepa/{bancoId}/cuentas/{cuentaId}")
+	//READ DETAIL CUENTA BY ID AND BY BANCO ID -- AUN NO SE USA
+	@GetMapping("/listBanco/{bancoId}/cuentas/{cuentaId}")
 	public CuentaBancaria getCuentasIdByBancoId(
 			@PathVariable(value = "bancoId") Long bancoId,
 			@PathVariable(value = "cuentaId")Long cuentaId){
@@ -173,7 +174,6 @@ public class BancoController {
 	@DeleteMapping("/delete/cuentas/{id}")
 	private ResponseEntity<Boolean> deleteCuentaBancaria (@PathVariable("id")Long id){
 		bancoService.deleteByCuentaId(id);
-		return ResponseEntity.ok(!(bancoService.findById(id)!=null));
-		
+		return ResponseEntity.ok(!(bancoService.findById(id)!=null));	
 	}
 }

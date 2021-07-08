@@ -1,54 +1,51 @@
 package com.app.model.Maestro.Tercero;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class CuentaTercero {
+@Table(name = "cuenta_terceros")
+public class CuentaTercero implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String cci;
+	
 	private String num;
+	private String cci;
 	private String entidad;
 	private String moneda;
-	private String tipo_cuenta;
-	/*
-	//N Cuenta -> 1 Tercero
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "proveedor_id")
+	private String tipoCuenta;
+	
+	//N Direccion -> 1 Tercero
 	@JsonIgnore
-	private Proveedor proveedor;
+	@ManyToOne()
+	@JoinColumn(name = "proveedor_id")
+	private Proveedor proveedorId;
 
-	public Cuenta() {
-		
-	}
+	/*N Direccion -> 1 Tercero
+	@JsonIgnore
+	@ManyToOne()
+	@JoinColumn(name = "cliente_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Cliente clienteId;
+*
 	
-	public Cuenta(String cci, String num, String entidad, String moneda, String tipo_cuenta, Proveedor proveedor) {
-		this.cci = cci;
-		this.num = num;
-		this.entidad = entidad;
-		this.moneda = moneda;
-		this.tipo_cuenta = tipo_cuenta;
-		this.proveedor = proveedor;
-	}
-	
-		public Proveedor getProveedor() {
-		return proveedor;
-	}
-
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
-	}
-*/
+	/* GET & SET*/
 	public long getId() {
 		return id;
 	}
@@ -57,20 +54,20 @@ public class CuentaTercero {
 		this.id = id;
 	}
 
-	public String getCci() {
-		return cci;
-	}
-
-	public void setCci(String cci) {
-		this.cci = cci;
-	}
-
 	public String getNum() {
 		return num;
 	}
 
 	public void setNum(String num) {
 		this.num = num;
+	}
+
+	public String getCci() {
+		return cci;
+	}
+
+	public void setCci(String cci) {
+		this.cci = cci;
 	}
 
 	public String getEntidad() {
@@ -89,13 +86,25 @@ public class CuentaTercero {
 		this.moneda = moneda;
 	}
 
-	public String getTipo_cuenta() {
-		return tipo_cuenta;
+	public String getTipoCuenta() {
+		return tipoCuenta;
 	}
 
-	public void setTipo_cuenta(String tipo_cuenta) {
-		this.tipo_cuenta = tipo_cuenta;
+	public void setTipoCuenta(String tipoCuenta) {
+		this.tipoCuenta = tipoCuenta;
 	}
 
+	public Proveedor getProveedorId() {
+		return proveedorId;
+	}
 
+	public void setProveedorId(Proveedor proveedorId) {
+		this.proveedorId = proveedorId;
+	}
+
+	
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

@@ -1,72 +1,54 @@
 package com.app.model.Maestro.Tercero;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Cliente {
+@Table(name = "clientes")
+public class Cliente implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@Column(unique = true)
 	private String codigo;
-	private int ruc;
+	@Column(unique = true)
+	private String ruc;
+	
 	@Temporal(TemporalType.DATE)
 	private Date fechaInicio;
-	private String nombre;
-	private String rubro;
+	private String razonSocial;
+	private String rubroActividad;
 	private String comentario;
-	/*
-	//1 tercero -> N Direccion
-	@OneToMany(mappedBy = "cliente",  cascade = CascadeType.ALL)
-	private Set<Direccion> direcciones = new HashSet<>();
-	//1 tercero -> N Contacto
-	@OneToMany(mappedBy = "cliente",  cascade = CascadeType.ALL)
-	private Set<Contacto> contactos = new HashSet<>();
 	
+	/* CONSTRUCTOR*/
 	public Cliente() {
 		
 	}
 
-	public Cliente(String codigo, int ruc, Date fechaInicio, String nombre, String rubro, String comentario,
-			Set<Direccion> direcciones, Set<Contacto> contactos) {
+	public Cliente(String codigo, String ruc, Date fechaInicio, String razonSocial, String rubroActividad,
+				   String comentario) {
 		super();
 		this.codigo = codigo;
 		this.ruc = ruc;
 		this.fechaInicio = fechaInicio;
-		this.nombre = nombre;
-		this.rubro = rubro;
+		this.razonSocial = razonSocial;
+		this.rubroActividad = rubroActividad;
 		this.comentario = comentario;
-		this.direcciones = direcciones;
-		this.contactos = contactos;
-	}
-	
-	public Set<Direccion> getDirecciones() {
-		return direcciones;
 	}
 
-	public void setDirecciones(Set<Direccion> direcciones) {
-		this.direcciones = direcciones;
-	}
-
-	public Set<Contacto> getContactos() {
-		return contactos;
-	}
-
-	public void setContactos(Set<Contacto> contactos) {
-		this.contactos = contactos;
-	}*/
-
+	/* GET & SET*/
 	public long getId() {
 		return id;
 	}
@@ -83,11 +65,11 @@ public class Cliente {
 		this.codigo = codigo;
 	}
 
-	public int getRuc() {
+	public String getRuc() {
 		return ruc;
 	}
 
-	public void setRuc(int ruc) {
+	public void setRuc(String ruc) {
 		this.ruc = ruc;
 	}
 
@@ -99,23 +81,22 @@ public class Cliente {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getRazonSocial() {
+		return razonSocial;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
 	}
 
-	public String getRubro() {
-		return rubro;
+	public String getRubroActividad() {
+		return rubroActividad;
 	}
 
-	public void setRubro(String rubro) {
-		this.rubro = rubro;
+	public void setRubroActividad(String rubroActividad) {
+		this.rubroActividad = rubroActividad;
 	}
 
-	
 	public String getComentario() {
 		return comentario;
 	}
@@ -123,6 +104,8 @@ public class Cliente {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

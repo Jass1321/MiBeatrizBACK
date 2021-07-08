@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.app.model.Maestro.Tercero.Cliente;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
-	Optional<Cliente> findByRuc(int ruc);
-	boolean existsByRuc(int ruc);
+public interface ClienteRepository extends JpaRepository<Cliente, Long>{
+	
+	Optional<Cliente> findByRuc(String ruc);
+	boolean existsByRuc(String ruc);
+	
 }

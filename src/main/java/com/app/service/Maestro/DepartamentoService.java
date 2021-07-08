@@ -98,8 +98,4 @@ public class DepartamentoService {
 	public void deleteByAreaId(Long id) {
 		areaRepository.deleteById(id);
 	}
-
-	public void deleteArea(Area area) {
-		areaRepository.delete(area);
-	}
 }

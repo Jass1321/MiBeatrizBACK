@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.app.model.Maestro.Tercero.Direccion;
+import com.app.model.Maestro.Tercero.DireccionTercero;
 import com.app.model.Maestro.Tercero.Proveedor;
-import com.app.repository.Maestro.Tercero.DireccionRepository;
-import com.app.repository.Maestro.Tercero.ProveedorRepository;
 
 @Component
 public class MyRunnerProveedor implements CommandLineRunner {
