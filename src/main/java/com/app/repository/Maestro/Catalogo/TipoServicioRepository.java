@@ -1,10 +1,11 @@
 package com.app.repository.Maestro.Catalogo;
-import com.app.model.Maestro.Catalogo.Familia;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.app.model.Maestro.Catalogo.TipoServicio;
+
 @Repository
-public interface FamiliaRepository extends JpaRepository<Familia, Long> {
+public interface TipoServicioRepository  extends JpaRepository<TipoServicio, Long>  {
 
 }

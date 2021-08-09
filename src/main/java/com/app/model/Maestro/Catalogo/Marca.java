@@ -1,15 +1,21 @@
 package com.app.model.Maestro.Catalogo;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "familias")
-public class Familia implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+@Table(name = "marcas")
+public class Marca implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -17,21 +23,17 @@ public class Familia implements Serializable {
 	@NotNull
 	@Column(unique = true)
 	private String nombre;
-	
-	//1 Familia -> N Sub-familias
-	//@OneToMany(mappedBy = "familia", fetch = FetchType.EAGER)
-	//private Set<Subfamilia> subfamilias = new HashSet<>();
 
 	/* CONSTRUCTOR*/
-	public Familia() {
+	public Marca() {
 		
 	}
-	
-	public Familia(@NotNull String nombre) {
+
+	public Marca(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
-
+	
 	/* GET & SET*/
 	public Long getId() {
 		return id;
@@ -48,12 +50,9 @@ public class Familia implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	/*public Set<Subfamilia> getSubfamilias() {
-		return subfamilias;
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-
-	public void setSubfamilias(Set<Subfamilia> subfamilias) {
-		this.subfamilias = subfamilias;
-	}*/
+	
 }

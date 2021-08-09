@@ -8,18 +8,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "contacto_terceros")
 public class ContactoTercero {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	private String nombre;
 	private String cargo;
@@ -27,25 +22,22 @@ public class ContactoTercero {
 	private String telefono;
 	
 	//N Direccion -> 1 Tercero
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "proveedor_id")
 	private Proveedor proveedorId;
 
-	/*N Direccion -> 1 Tercero
-	@JsonIgnore
+	//N Direccion -> 1 Tercero
 	@ManyToOne()
 	@JoinColumn(name = "cliente_id")
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cliente clienteId;
-	 */   
-	
+	 
 
 	/* GET & SET*/
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -89,5 +81,14 @@ public class ContactoTercero {
 		this.proveedorId = proveedorId;
 	}
 
+	public Cliente getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Cliente clienteId) {
+		this.clienteId = clienteId;
+	}
+
+	
 
 }

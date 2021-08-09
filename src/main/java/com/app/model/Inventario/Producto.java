@@ -1,10 +1,11 @@
-package com.app.model.Maestro.Catalogo;
+package com.app.model.Inventario;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
 import com.app.enums.Color;
 import com.app.enums.Medida;
+import com.app.model.Maestro.Catalogo.Subfamilia;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -33,10 +34,13 @@ public class Producto {
 	private int precio;
 	private boolean estado;
 	
+	//CONSTRUCTOR
+	
 	//GET AND SET
 	public long getId() {
 		return id;
 	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}

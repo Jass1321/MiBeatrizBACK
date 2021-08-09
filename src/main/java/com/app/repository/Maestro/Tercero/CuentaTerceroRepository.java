@@ -12,7 +12,9 @@ import com.app.model.Maestro.Tercero.Proveedor;
 @Repository
 public interface CuentaTerceroRepository  extends JpaRepository<CuentaTercero, Long> {
 
-	public List<CuentaTercero> findByProveedorId(Proveedor proveedorId);
+	public List<CuentaTercero>   findByProveedorId(Proveedor proveedorId);
+	
 	public Optional<CuentaTercero> findByIdAndProveedorId(Long id, Long proveedorId);
 	
+	public void deleteByProveedorId(Proveedor proveedor);
 }

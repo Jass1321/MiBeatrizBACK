@@ -1,13 +1,13 @@
-package com.app.service.Maestro.Catalogo;
+package com.app.service.Almacen;
 
-import com.app.repository.Maestro.Catalogo.ProductoRepository;
 import com.app.criteria.ProductoCriteria;
-import com.app.model.Maestro.Catalogo.Producto;
-
+import com.app.model.Inventario.Producto;
 import com.app.model.Maestro.Catalogo.Familia_;
 
 import com.app.model.Maestro.Catalogo.Producto_;
 import com.app.model.Maestro.Catalogo.Subfamilia_;
+import com.app.repository.Almacen.ProductoImageRepository;
+import com.app.repository.Almacen.ProductoRepository;
 
 import io.github.jhipster.service.QueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.JoinType;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 @Service
 //readOnly = true solo para lectura no CRUD
@@ -25,6 +31,9 @@ public class ProductoService extends QueryService<Producto>{
 
 	@Autowired
 	ProductoRepository productoRepository;
+
+	@Autowired
+	ProductoImageRepository productoImgRepository;
 	
 	public List<Producto> findByCriteria(ProductoCriteria productoCriteria){
 		final Specification<Producto> specification = createSpecification(productoCriteria);
@@ -92,5 +101,7 @@ public class ProductoService extends QueryService<Producto>{
 		}
 		return specification;
 	}
+	
+	
 	
 }

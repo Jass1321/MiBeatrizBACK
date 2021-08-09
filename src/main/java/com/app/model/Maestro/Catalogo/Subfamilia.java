@@ -7,10 +7,16 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.app.model.Inventario.Producto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -18,29 +24,45 @@ import javax.persistence.Entity;
 
 @Entity
 public class Subfamilia {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Column(unique = true)
 	private String nombre;
 	
-	//N Sub-familias -> 1 Familia
-	@ManyToOne(optional = false)
-	@JsonIgnoreProperties("subfamilias")
+	/*N Sub-familias -> 1 Familia*/
+	//@JsonIgnoreProperties("subfamilias")
+	@ManyToOne()
+	@JoinColumn(name = "familia_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Familia familia;
 	
-	//1 Sub-Familia -> N Productos
+	/*1 Sub-Familia -> N Productos
 	@OneToMany(mappedBy = "subfamilia" )
 	@JsonIgnore
 	private Set<Producto> productos = new HashSet<>();
+	*/
 	
-	public long getId() {
+	/* CONSTRUCTOR*/
+	public Subfamilia() {
+		
+	}
+
+	public Subfamilia(@NotNull String nombre, Familia familia) {
+		super();
+		this.nombre = nombre;
+		this.familia = familia;
+	}
+
+	/* GET & SET*/
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -60,12 +82,13 @@ public class Subfamilia {
 		this.familia = familia;
 	}
 
+	/*
 	public Set<Producto> getProductos() {
 		return productos;
 	}
 
 	public void setProductos(Set<Producto> productos) {
 		this.productos = productos;
-	}
+	}*/
 	
 }

@@ -2,14 +2,10 @@ package com.app.dto.Maestro.Tercero;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-
 import com.app.model.Maestro.Tercero.ContactoTercero;
 import com.app.model.Maestro.Tercero.CuentaTercero;
 import com.app.model.Maestro.Tercero.DireccionTercero;
 import com.app.model.Maestro.Tercero.Proveedor;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class ProveedorDTO {
 
@@ -17,50 +13,40 @@ public class ProveedorDTO {
 	
 	//1 tercero -> N Direccion
 	//@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
-	List<DireccionTercero> direcciones;
+	List<DireccionTercero> direccion;
 	
 	//1 tercero -> N Contacto
 	//@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
-	List<ContactoTercero> contactos;
+	List<ContactoTercero> contacto;
 	
 	//1 tercero -> N Cuenta
 	//@OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
-	List<CuentaTercero> cuentas;
-
-	
+	List<CuentaTercero> cuenta;
 	
 	/* GET & SET*/
 	public Proveedor getProveedor() {
 		return proveedor;
 	}
-
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
-
-
-
-	public List<DireccionTercero> getDirecciones() {
-		return direcciones;
+	public List<DireccionTercero> getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(List<DireccionTercero> direccion) {
+		this.direccion = direccion;
+	}
+	public List<ContactoTercero> getContacto() {
+		return contacto;
+	}
+	public void setContacto(List<ContactoTercero> contacto) {
+		this.contacto = contacto;
+	}
+	public List<CuentaTercero> getCuenta() {
+		return cuenta;
+	}
+	public void setCuenta(List<CuentaTercero> cuenta) {
+		this.cuenta = cuenta;
 	}
 
-	public void setDirecciones(List<DireccionTercero> direcciones) {
-		this.direcciones = direcciones;
-	}
-
-	public List<ContactoTercero> getContactos() {
-		return contactos;
-	}
-
-	public void setContactos(List<ContactoTercero> contactos) {
-		this.contactos = contactos;
-	}
-
-	public List<CuentaTercero> getCuentas() {
-		return cuentas;
-	}
-
-	public void setCuentas(List<CuentaTercero> cuentas) {
-		this.cuentas = cuentas;
-	}
 }

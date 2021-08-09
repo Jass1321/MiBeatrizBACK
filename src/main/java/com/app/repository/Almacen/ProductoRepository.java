@@ -1,10 +1,14 @@
-package com.app.repository.Maestro.Catalogo;
+package com.app.repository.Almacen;
 
-import com.app.model.Maestro.Catalogo.Producto;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import com.app.model.Inventario.Producto;
+
 public interface ProductoRepository extends JpaRepository<Producto, Long> ,
 	JpaSpecificationExecutor<Producto>{
+	
+	
 }

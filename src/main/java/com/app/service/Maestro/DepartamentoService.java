@@ -56,7 +56,7 @@ public class DepartamentoService {
 	}
 	
 	public Optional<Area> findById(Long id) {
-		return null;
+		return areaRepository.findById(id);
 	}
 	
 	public Area getAreaIdByIdDep(Long areaId) {

@@ -1,8 +1,6 @@
 package com.app.service.Maestro.Tercero;
 
 import java.util.List;
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.app.dto.NotFoundException;
 import com.app.model.Maestro.Tercero.Cliente;
-import com.app.model.Maestro.Tercero.ContactoTercero;
-import com.app.model.Maestro.Tercero.CuentaTercero;
-import com.app.model.Maestro.Tercero.DireccionTercero;
 import com.app.repository.Maestro.Tercero.ClienteRepository;
 import com.app.repository.Maestro.Tercero.ContactoTerceroRepository;
-import com.app.repository.Maestro.Tercero.CuentaTerceroRepository;
+import com.app.repository.Maestro.Tercero.DireccionTerceroRepository;
+
 @Service
 @Transactional
 public class ClienteService {
 	
-	/*
 	@Autowired
 	ClienteRepository clienteRepository;
 	
@@ -33,32 +28,7 @@ public class ClienteService {
 	@Autowired
 	ContactoTerceroRepository contactoRepository;
 	
-	@Autowired
-	CuentaTerceroRepository cuentaRepository;
-	
-	/*----------READ BASIC----------
-	public List<Cliente> listCliente() {
-		return clienteRepository.findAll();
-	}
-	
-	public List<DireccionTercero> listDireccion() {
-		return direccionRepository.findAll();
-	}
-	
-	public List<ContactoTercero> listContacto() {
-		return contactoRepository.findAll();
-	}
-	
-	public List<CuentaTercero> listCuenta() {
-		return cuentaRepository.findAll();
-	}
-	
-	/*----------READ WITH PAGE----------
-	public Page<Cliente> listClienteWithPage(Pageable pageable){
-        return clienteRepository.findAll(pageable);
-    }
-	
-	/*----------CONDITIONS----------
+	/*----------CONDITIONS----------*/
 	public boolean existsById(Long id) {
 		return clienteRepository.existsById(id);
 	}
@@ -66,8 +36,12 @@ public class ClienteService {
 	public boolean existsByRuc(String ruc) {
 		return clienteRepository.existsByRuc(ruc);
 	}
-	*/
-	/*----------SEARCHS----------
+	
+	/*----------SEARCHS----------*/
+	public Cliente findById(Long id) {
+		return clienteRepository.findById(id).orElse(null);
+	}
+	
 	public Cliente getCliById(Long id) {
 		Cliente cli = new Cliente();
 		cli = clienteRepository.findById(id)
@@ -82,46 +56,31 @@ public class ClienteService {
 		return cli;
 	}
 	
-	public Optional<DireccionTercero> findDireccionById(Long id) {
-		return null;
+	public Long obtenerCodigo() {
+		Cliente cliente = clienteRepository.findTopByOrderByIdDesc();
+		if(cliente == null) {
+			return 0L;
+		}
+		return cliente.getId();
 	}
 	
-	public Optional<ContactoTercero> findContactoById(Long id) {
-		return null;
+	
+	/*----------READ BASIC----------*/
+	public List<Cliente> listCliente() {
+		return (List<Cliente>) clienteRepository.findAll();
 	}
 	
-	*/
-
-	/*----------CREATE----------
+	/*----------READ WITH PAGE----------*/
+	public Page<Cliente> listClienteWithPage(Pageable pageable){
+        return clienteRepository.findAll(pageable);
+    }
+	
+	/*----------CREATE----------*/
 	public Cliente createCliente(Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}
 	
-	public List<DireccionTercero> saveDireccion(List<DireccionTercero> direccion) {
-		return direccionRepository.saveAll(direccion);
-	}
-	
-	public List<ContactoTercero> saveContacto(List<ContactoTercero> contacto) {
-		return contactoRepository.saveAll(contacto);
-	}
-*/
-	/*----------UPDATE----------
-	public Cliente updateCliente(Long id, Cliente cliDTO) {
-		Cliente cli = new Cliente();
-		cli = clienteRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Cliente ID - " + id +"no existe"));
-		cli.setRuc(cliDTO.getRuc());
-		cli.setFechaInicio(cliDTO.getFechaInicio());
-		cli.setRazonSocial(cliDTO.getRazonSocial());
-		cli.setRubroActividad(cliDTO.getRubroActividad());
-		cli.setComentario(cliDTO.getComentario());
-		
-		Cliente cliUp = clienteRepository.save(cli);
-		return cliUp;
-	}
-	*/
-	
-	/*----------DELETE----------
+	/*----------DELETE----------*/
 	public ResponseEntity<?> deleteCliente(Long id) {
 		Cliente cli = new Cliente();
 		cli = clienteRepository.findById(id)
@@ -131,13 +90,5 @@ public class ClienteService {
 		return ResponseEntity.ok().build();
 	}
 	
-	public void deleteByDireccionId(Long id) {
-		direccionRepository.deleteById(id);
-	}
 	
-	public void deleteByContactoId(Long id) {
-		cuentaRepository.deleteById(id);
-	}
-	
-	*/
 }

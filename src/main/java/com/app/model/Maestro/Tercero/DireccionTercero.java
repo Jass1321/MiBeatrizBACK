@@ -10,11 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Table(name = "direccion_terceros")
 @Entity
 public class DireccionTercero implements Serializable{
 	
@@ -33,15 +31,15 @@ public class DireccionTercero implements Serializable{
 	
 	//N Direccion -> 1 Tercero
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "proveedor_id")
 	private Proveedor proveedorId;
 
-	/*N Direccion -> 1 Tercero
+	//N Direccion -> 1 Tercero
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "cliente_id")
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Cliente clienteId;
-    */
 	
 	/* GET & SET*/
 	public Long getId() {
@@ -108,6 +106,13 @@ public class DireccionTercero implements Serializable{
 		this.proveedorId = proveedorId;
 	}
 
+	public Cliente getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Cliente clienteId) {
+		this.clienteId = clienteId;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

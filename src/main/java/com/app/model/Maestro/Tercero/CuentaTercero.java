@@ -10,10 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "cuenta_terceros")
@@ -23,7 +19,7 @@ public class CuentaTercero implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	private String num;
 	private String cci;
@@ -32,25 +28,16 @@ public class CuentaTercero implements Serializable {
 	private String tipoCuenta;
 	
 	//N Direccion -> 1 Tercero
-	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name = "proveedor_id")
 	private Proveedor proveedorId;
-
-	/*N Direccion -> 1 Tercero
-	@JsonIgnore
-	@ManyToOne()
-	@JoinColumn(name = "cliente_id")
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Cliente clienteId;
-*
 	
 	/* GET & SET*/
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -102,8 +89,6 @@ public class CuentaTercero implements Serializable {
 		this.proveedorId = proveedorId;
 	}
 
-	
-	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
