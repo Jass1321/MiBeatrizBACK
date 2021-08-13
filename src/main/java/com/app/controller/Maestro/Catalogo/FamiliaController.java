@@ -46,9 +46,14 @@ public class FamiliaController {
 	SubfamiliaRepository subfamiliaRepository;
 
 	/*----------READ----------*/
-	@GetMapping("/list")
-	private ResponseEntity<List<Familia>> list() {
+	@GetMapping("/listFam")
+	private ResponseEntity<List<Familia>> listFamilia() {
 		return ResponseEntity.ok(familiaService.listFamilia());
+	}
+	
+	@GetMapping("/listSub")
+	private ResponseEntity<List<Subfamilia>> listSubfamilia() {
+		return ResponseEntity.ok(subfamiliaService.listSubfamilia());
 	}
 	/*----------READ WITH PAGE----------*/
 	// READ FAMILIA WITH PAGE
@@ -67,7 +72,7 @@ public class FamiliaController {
 
 	// READ SUB-FAMILIA WITH PAGE
 	@GetMapping("/listSubfamilia")
-	public ResponseEntity<Page<Subfamilia>> listAllDepa(@RequestParam(defaultValue = "0") int page,
+	public ResponseEntity<Page<Subfamilia>> listAllSub(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "nombre") String order,
 			@RequestParam(defaultValue = "true") boolean asc) {
 		Page<Subfamilia> sub = subfamiliaService.listSubfamiliaWithPage(PageRequest.of(page, size, Sort.by(order)));

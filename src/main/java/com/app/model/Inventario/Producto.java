@@ -1,29 +1,45 @@
 package com.app.model.Inventario;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.app.enums.Color;
 import com.app.enums.Medida;
+import com.app.model.Maestro.Catalogo.Marca;
 import com.app.model.Maestro.Catalogo.Subfamilia;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class Producto {
+@Table(name = "productos")
+public class Producto implements Serializable  {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
 	private String codigo;
 	
+	@NotNull
+	@Column(unique = true)
+	private String nombre;
+	
 	//N Productos -> 1 Subfamilia
-	@ManyToOne(optional=false)
-	@JsonIgnoreProperties("productos")
+	@ManyToOne
+	//@JsonIgnoreProperties("productos")
+	@JoinColumn(name = "subfamilia_id")
 	private Subfamilia subfamilia;
 	
-	private String marca;
-	private String descripcion;
+    //N Productos -> 1 Subfamilia
+	@ManyToOne
+	@JoinColumn(name = "marca_id")
+	//@JsonIgnoreProperties("productos")
+	private Marca marca;
 	
 	@Enumerated(EnumType.STRING)
     private Medida medida;
@@ -34,8 +50,11 @@ public class Producto {
 	private int precio;
 	private boolean estado;
 	
-	//CONSTRUCTOR
+	public Producto() {
+		
+	}
 	
+
 	//GET AND SET
 	public long getId() {
 		return id;
@@ -50,6 +69,23 @@ public class Producto {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
 	public Subfamilia getSubfamilia() {
 		return subfamilia;
 	}
@@ -57,18 +93,6 @@ public class Producto {
 		this.subfamilia = subfamilia;
 	}
 	
-	public String getMarca() {
-		return marca;
-	}
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 	public int getPrecio() {
 		return precio;
 	}
@@ -81,7 +105,6 @@ public class Producto {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
 	
 	public Medida getMedida() {
 		return medida;

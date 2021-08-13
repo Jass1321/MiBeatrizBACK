@@ -65,10 +65,10 @@ public class MarcaService {
 	}
 	
 	/*----------UPDATE----------*/
-	public Marca update(Long marcaId, Marca marcaDTO) {
+	public Marca update(Long id, Marca marcaDTO) {
 		Marca marca = new Marca();
-		marca = marcaRepository.findById(marcaId)
-				.orElseThrow(() -> new NotFoundException("Marca ID - " + marcaId +"no existe"));
+		marca = marcaRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Marca ID - " + id +"no existe"));
 		marca.setNombre(marcaDTO.getNombre());;
 		
 		Marca marcaUp = marcaRepository.save(marca);
@@ -76,10 +76,10 @@ public class MarcaService {
 	}
 	
 	/*----------DELETE----------*/
-	public ResponseEntity<?> delete(Long marcaId) {
+	public ResponseEntity<?> delete(Long id) {
 		Marca marca = new Marca();
-		marca = marcaRepository.findById(marcaId)
-				.orElseThrow(() -> new NotFoundException("Marca ID - " + marcaId +"no existe"));
+		marca = marcaRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Marca ID - " + id +"no existe"));
 		
 		marcaRepository.delete(marca);
 		return ResponseEntity.ok().build();

@@ -1,5 +1,6 @@
 package com.app.service.Maestro.Catalogo;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.app.dto.NotFoundException;
+import com.app.model.Maestro.Catalogo.Familia;
 import com.app.model.Maestro.Catalogo.Subfamilia;
 import com.app.repository.Maestro.Catalogo.SubfamiliaRepository;
 
@@ -21,7 +23,7 @@ public class SubfamiliaService {
 	
 	/*----------SEARCHS----------*/
 	public Subfamilia getSubIdByIdFamId(Long subId) {
-		Subfamilia subfamilia = new Subfamilia(null, null);
+		Subfamilia subfamilia = new Subfamilia();
 		subfamilia = subfamiliaRepository.findById(subId)
 				.orElseThrow(() -> new NotFoundException("Area ID - " + subId +"no existe"));
 		return subfamilia;
@@ -31,9 +33,13 @@ public class SubfamiliaService {
 		return null;
 	}
 	
-	/*----------READ BASIC----------*/
-	public Page<Subfamilia> listSubfamilia(Pageable pageable) {
-		return subfamiliaRepository.findAll(pageable);
+	/*----------READ BASIC
+	 * public List<Familia> listFamilia(){
+		return familiaRepository.findAll();
+	}
+	----------*/
+	public List<Subfamilia> listSubfamilia() {
+		return subfamiliaRepository.findAll();
 	}
 	
 	/*----------READ WITH PAGE----------*/

@@ -68,8 +68,8 @@ public class MarcaController {
 	
 	/*----------UPDATE----------*/
 	@PutMapping("/update/{id}")
-	public Marca updateMarca(@PathVariable Long marcaId, @Validated @RequestBody Marca marcaDTO) {
-		return marcaService.update(marcaId, marcaDTO) ;
+	public Marca updateMarca(@PathVariable Long id, @Validated @RequestBody Marca marcaDTO) {
+		return marcaService.update(id, marcaDTO) ;
 	}
 	
 	/*----------DELETE----------*/

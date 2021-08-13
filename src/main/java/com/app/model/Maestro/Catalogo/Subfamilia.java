@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.OnDelete;
@@ -33,29 +32,33 @@ public class Subfamilia {
 	@Column(unique = true)
 	private String nombre;
 	
-	/*N Sub-familias -> 1 Familia*/
-	//@JsonIgnoreProperties("subfamilias")
+	//N Sub-familias -> 1 Familia*
+	@JsonIgnoreProperties("subfamilias") 
 	@ManyToOne()
 	@JoinColumn(name = "familia_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Familia familia;
 	
-	/*1 Sub-Familia -> N Productos
+	//1 Sub-Familia -> N Productos*/
 	@OneToMany(mappedBy = "subfamilia" )
 	@JsonIgnore
 	private Set<Producto> productos = new HashSet<>();
-	*/
+	
 	
 	/* CONSTRUCTOR*/
 	public Subfamilia() {
 		
 	}
 
-	public Subfamilia(@NotNull String nombre, Familia familia) {
+	
+
+	public Subfamilia( @NotNull String nombre, Familia familia) {
 		super();
 		this.nombre = nombre;
 		this.familia = familia;
 	}
+
+
 
 	/* GET & SET*/
 	public Long getId() {
@@ -82,13 +85,13 @@ public class Subfamilia {
 		this.familia = familia;
 	}
 
-	/*
+	
 	public Set<Producto> getProductos() {
 		return productos;
 	}
 
 	public void setProductos(Set<Producto> productos) {
 		this.productos = productos;
-	}*/
+	}
 	
 }

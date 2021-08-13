@@ -1,6 +1,9 @@
 package com.app.model.Maestro.Catalogo;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -19,8 +22,8 @@ public class Familia implements Serializable {
 	private String nombre;
 	
 	//1 Familia -> N Sub-familias
-	//@OneToMany(mappedBy = "familia", fetch = FetchType.EAGER)
-	//private Set<Subfamilia> subfamilias = new HashSet<>();
+	@OneToMany(mappedBy = "familia", fetch = FetchType.EAGER)
+	private Set<Subfamilia> subfamilias = new HashSet<>();
 
 	/* CONSTRUCTOR*/
 	public Familia() {
@@ -32,6 +35,7 @@ public class Familia implements Serializable {
 		this.nombre = nombre;
 	}
 
+	
 	/* GET & SET*/
 	public Long getId() {
 		return id;
@@ -49,11 +53,11 @@ public class Familia implements Serializable {
 		this.nombre = nombre;
 	}
 
-	/*public Set<Subfamilia> getSubfamilias() {
+	public Set<Subfamilia> getSubfamilias() {
 		return subfamilias;
 	}
 
 	public void setSubfamilias(Set<Subfamilia> subfamilias) {
 		this.subfamilias = subfamilias;
-	}*/
+	}
 }

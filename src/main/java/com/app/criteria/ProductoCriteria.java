@@ -10,17 +10,12 @@ import io.github.jhipster.service.filter.StringFilter;
 public class ProductoCriteria {
 
 	public static class ColorFilter extends Filter<Color>{
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;}
+		private static final long serialVersionUID = 1L;	
+	}
     public static class MedidaFilter extends Filter<Medida>{
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;}
+    	private static final long serialVersionUID = 1L;
+    }
+    
     private StringFilter familia;
     private StringFilter subfamilia;
     private StringFilter codigo;
@@ -70,7 +65,6 @@ public class ProductoCriteria {
 	public void setColor(ColorFilter color) {
 		this.color = color;
 	}
-	
 	
 	public MedidaFilter getMedida() {
 		return medida;
